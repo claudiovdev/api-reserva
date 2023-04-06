@@ -1,0 +1,42 @@
+
+server:
+  port: 8082
+  servlet:
+    context-path: '/api-reserva'
+
+spring:
+  application:
+    name: apireserva-reserva-service
+  datasource:
+    url: jdbc:postgresql://localhost:5432/microsservicos-reserva
+    username: postgres
+    password: vini4222
+  jpa:
+    hibernate:
+      ddl-auto: update
+      dialect: org.hibernate.dialect.PostgreSQLDialect
+      jdbc:
+        lob.non-contextual-creation: true
+    properties:
+      hibernate:
+        show_sql: true
+  rabbitmq:
+    addresses: amqps://jfjbuyzn:YVA3pFuUdOxbE4_5bL9srQzHY3YwpM4W@moose.rmq.cloudamqp.com/jfjbuyzn
+
+apireserva:
+  api:
+    url:
+      usuario: 'http://apireserva-usuario-service'
+  broker:
+    exchange:
+      userEventExchange: apireserva.eventoDeUsuario
+    queue:
+      userEventQueue:
+        name: apireserva.eventoDeUsuario.ms.reserva
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: 'http://localhost:8761/eureka'
+  instance:
+    hostname: localhost
