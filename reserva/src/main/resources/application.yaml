@@ -21,7 +21,7 @@ spring:
       hibernate:
         show_sql: true
   rabbitmq:
-    addresses: amqps://jfjbuyzn:YVA3pFuUdOxbE4_5bL9srQzHY3YwpM4W@moose.rmq.cloudamqp.com/jfjbuyzn
+    addresses: amqps://cxsjvvjz:au7bfHJoqYGYvIfrDjsGuGVLTSw0gYrm@chimpanzee.rmq.cloudamqp.com/cxsjvvjz
 
 apireserva:
   api:
@@ -34,9 +34,14 @@ apireserva:
       userEventQueue:
         name: apireserva.eventoDeUsuario.ms.reserva
 
+ead:
+  serviceRegistry:
+    username: serviceregistry
+    password: 'ead123sr'
+
 eureka:
   client:
     serviceUrl:
-      defaultZone: 'http://localhost:8761/eureka'
+      defaultZone: 'http://${ead.serviceRegistry.username}:${ead.serviceRegistry.password}@localhost:8761/eureka'
   instance:
     hostname: localhost
